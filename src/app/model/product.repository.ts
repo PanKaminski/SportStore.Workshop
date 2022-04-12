@@ -10,7 +10,7 @@ export class ProductRepository{
     constructor(private dataSOurce: StaticDataSource){
         dataSOurce.getProducts().subscribe(data => {
             this.products = data;
-            this.categories = data.filter(p => p.category as string !== undefined)
+            this.categories = data.filter(p => p.category !== undefined)
             .map(p => p.category as string)
             .filter((c, index, array) => array.indexOf(c) == index)
             .sort();
@@ -25,7 +25,7 @@ export class ProductRepository{
         return this.products.find(p => p.id === id) as Product;
     }
 
-    getCategories() : string[] {
+    getCategories(): string[] {
         return this.categories;
     }
 }
